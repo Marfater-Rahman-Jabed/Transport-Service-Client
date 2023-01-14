@@ -1,11 +1,13 @@
 import React from 'react';
+import HeaderLogo from '../Image/HeaderLogo-2.png'
 
 const Header = () => {
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-sky-400 h-24 mb-2">
                 <div className="flex-1">
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <img src={HeaderLogo} className='w-20 rounded-2xl' alt="" />
+                    <a className="mx-1 normal-case text-2xl text-white">Travel Service</a>
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1">
