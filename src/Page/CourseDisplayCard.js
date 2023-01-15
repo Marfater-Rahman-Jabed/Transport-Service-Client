@@ -1,10 +1,17 @@
 import React from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import { FaStar } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const CourseDisplayCard = ({ course }) => {
 
-    const { picture, price, name, about, rating } = course;
+    const { _id, picture, price, name, about, rating } = course;
+
+    const handleDetails = (_id) => {
+        console.log(_id);
+
+    }
 
     return (
 
@@ -18,9 +25,15 @@ const CourseDisplayCard = ({ course }) => {
 
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
+                <span className='flex flex-row '>
+                    <p className='text-orange-500 font-bold text-xl' >Price: {price} Per KM</p>
+                    <span className='flex flex-row gap-1 justify-center align-middle '><span className='flex flex-row mt-2 text-xl text-orange-600'><FaStar ></FaStar><FaStar ></FaStar><FaStar ></FaStar></span><p className='font-bold text-2xl text-orange-600'>{rating}</p></span>
+                </span>
                 <p>{about.slice(0, 100)}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
+                    <Link to={`/Viewpage/${_id}`}>
+                        <button className="btn btn-primary" onClick={() => handleDetails(_id)}>View Details</button>
+                    </Link>
                 </div>
             </div>
         </div>

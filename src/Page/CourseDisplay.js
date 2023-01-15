@@ -17,7 +17,8 @@ const CourseDisplay = () => {
     return (
         <div>
             <div>
-                <h1 className='text-5xl text-orange-400 text-center font-bold shadow-lg mt-5 mb-5'>Our Services ...</h1>
+                <h1 className='text-5xl text-orange-600 text-center font-bold  mt-5 '>Our Services ...</h1>
+                <h1 className='text-2xl text-black text-center font-semibold  shadow-lg pb-5 mt-2'>We are always ready to serve you.</h1>
             </div>
             <div className='grid grid-cols-3 gap-2'>
                 {
