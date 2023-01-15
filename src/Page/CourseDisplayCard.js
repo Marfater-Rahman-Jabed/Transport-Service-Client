@@ -1,4 +1,6 @@
 import React from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const CourseDisplayCard = ({ course }) => {
 
@@ -7,7 +9,13 @@ const CourseDisplayCard = ({ course }) => {
     return (
 
         <div className="card card-compact mt-5  bg-base-100 shadow-xl">
-            <figure><img src={picture} alt="Shoes" className='h-52' /></figure>
+            <PhotoProvider>
+                <PhotoView src={picture}>
+                    <figure><img src={picture} alt="Shoes" className='h-52' /></figure>
+                    {/* <img src="/1-thumbnail.jpg" alt="" /> */}
+                </PhotoView>
+            </PhotoProvider>
+
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
                 <p>{about.slice(0, 100)}</p>
