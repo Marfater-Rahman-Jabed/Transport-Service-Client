@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../Contexts/Context';
 import HeaderLogo from '../Image/HeaderLogo-2.png'
 
 const Header = () => {
+    const { user } = useContext(AuthContext)
     return (
         <div>
             <div className="navbar bg-sky-400 h-24 mb-2">
@@ -11,7 +13,7 @@ const Header = () => {
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
+                        <li><a>{user}</a></li>
                         <li tabIndex={0}>
                             <a>
                                 Parent
