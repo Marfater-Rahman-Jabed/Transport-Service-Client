@@ -25,9 +25,11 @@ const CourseDisplayCard = ({ course }) => {
 
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
-                <span className='flex flex-row '>
+                <span className='flex flex-row justify-between'>
                     <p className='text-orange-500 font-bold text-xl' >Price: {price} Per KM</p>
-                    <span className='flex flex-row gap-1 justify-center align-middle '><span className='flex flex-row mt-2 text-xl text-orange-600'><FaStar ></FaStar><FaStar ></FaStar><FaStar ></FaStar></span><p className='font-bold text-2xl text-orange-600'>{rating}</p></span>
+                    <span className='flex flex-row gap-1 justify-center align-middle '>
+                        <span className='flex flex-row mt-2 text-xl text-orange-600'><FaStar ></FaStar><FaStar ></FaStar><FaStar ></FaStar></span>
+                        <p className='font-bold text-2xl text-orange-600 mt-1'>{rating}</p></span>
                 </span>
                 <p>{about.slice(0, 100)}</p>
                 <div className="card-actions justify-end">

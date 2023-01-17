@@ -1,34 +1,48 @@
 import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Contexts/Context';
-import HeaderLogo from '../Image/HeaderLogo-2.png'
+import HeaderLogo from '../Image/HeaderLogo-2.png';
+import { AiOutlineUser } from 'react-icons/ai'
 
 const Header = () => {
-    const { user } = useContext(AuthContext)
+    const { user, LogOut } = useContext(AuthContext);
+
+    const handleLogOut = event => {
+        LogOut()
+            .then(() => {
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
     return (
         <div>
-            <div className="navbar bg-sky-400 h-24 mb-2">
-                <div className="flex-1">
-                    <img src={HeaderLogo} className='w-20 rounded-2xl' alt="" />
-                    <a className="mx-1 normal-case text-2xl text-white">Travel Service</a>
+            <div className="navbar bg-sky-400 py-6">
+                <div className="navbar-start">
+                    <img src={HeaderLogo} className='w-24 h-full' alt="" />
+                    <NavLink className=" normal-case mx-1 text-2xl font-bold text-rose-600 " to='/'>Travel Service</NavLink>
                 </div>
-                <div className="flex-none">
-                    <ul className="menu menu-horizontal px-1">
-                        <li><a>{user}</a></li>
-                        <li tabIndex={0}>
-                            <a>
-                                Parent
-                                <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
-                            </a>
-                            <ul className="p-2 bg-base-100">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
-                    </ul>
+                <div className="navbar-center hidden lg:flex">
+                    {user?.email &&
+                        <>
+                            <Link to='/myreview' className='mx-3  text-orange-200 font-bold btn btn-ghost normal-case text-xl hover:text-orange-400 '>My Review</Link>
+                            <Link className=' text-orange-200 font-bold btn btn-ghost normal-case text-xl hover:text-orange-400 ' to='/addservice'>Add Service</Link>
+                            <AiOutlineUser></AiOutlineUser>
+                            <p className='mx-1 text-orange-200 font-semibold normal-case '>{user?.displayName ? <p>{user.displayName.toUpperCase()}</p> : <p>{user.email.substring(0, user.email.lastIndexOf("@")).toUpperCase()}</p>}</p>
+
+
+                        </>}
+
+                </div>
+                <div className="navbar-end">
+                    <NavLink to='/register' className="btn mx-2">Register</NavLink>
+                    {user?.email ? <NavLink className="btn" onClick={handleLogOut}>LogOut</NavLink> :
+                        <NavLink to='/login' className="btn">Login</NavLink>
+                    }
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
