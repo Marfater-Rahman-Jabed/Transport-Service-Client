@@ -4,6 +4,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { FaStar } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Contexts/Context';
+import ReviewPage from './ReviewPage';
 
 const ViewPage = () => {
 
@@ -33,7 +34,8 @@ const ViewPage = () => {
             serviceName,
             email,
             name,
-            message
+            message,
+            photo: user.photoURL
 
         }
 
@@ -93,7 +95,23 @@ const ViewPage = () => {
                 </div>
             </div>
             <div>
-                <h1>Our Reviews :{reviews.length}</h1>
+                <h1 className='text-center p-4 text-3xl font-semibold shadow-xl'>Our Reviews :{reviews.length}</h1>
+
+                {
+                    reviews.length > 0 ?
+                        <div>
+                            {
+                                reviews.map(review => <ReviewPage
+
+                                    key={review._id}
+                                    review={review}
+
+                                ></ReviewPage>)
+
+                            }
+                        </div>
+                        :
+                        <p className='text-white text-2xl py-12 border-2 bg-slate-400'>No Reviews yet...</p>}
 
             </div>
         </div>

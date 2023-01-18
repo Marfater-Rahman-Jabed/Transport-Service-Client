@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Context';
 
 const Register = () => {
-    const { CreateUser } = useContext(AuthContext)
+    const { CreateUser, googleSignIn, UpdateUser } = useContext(AuthContext)
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -20,6 +20,7 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 alert('successfully register');
+                handleProfile(name, photo);
                 form.reset();
                 console.log(user);
             })
@@ -27,6 +28,30 @@ const Register = () => {
                 console.error(error)
             })
 
+    }
+    const handleProfile = (name, photo) => {
+        const profile = {
+            displayName: name,
+            photoURL: photo,
+
+        }
+        UpdateUser(profile)
+            .then(() => {
+
+            })
+            .catch(() => {
+
+            })
+    }
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     return (
@@ -53,7 +78,7 @@ const Register = () => {
                             <button className='button'>Register</button>
                         </form>
                         <div className="icon-button">
-                            <button className='' ><span className='ms-2 flex flex-row justify-center align-middle gap-2' >
+                            <button className='' onClick={handleGoogle} ><span className='ms-2 flex flex-row justify-center align-middle gap-2' >
                                 <FaGoogle className='mt-1'></FaGoogle><p>Sign Up with Google</p>
                             </span></button>
                         </div>

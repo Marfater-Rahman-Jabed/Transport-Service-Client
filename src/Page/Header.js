@@ -28,7 +28,8 @@ const Header = () => {
                         <>
                             <Link to='/myreview' className='mx-3  text-orange-200 font-bold btn btn-ghost normal-case text-xl hover:text-orange-400 '>My Review</Link>
                             <Link className=' text-orange-200 font-bold btn btn-ghost normal-case text-xl hover:text-orange-400 ' to='/addservice'>Add Service</Link>
-                            <AiOutlineUser></AiOutlineUser>
+                            {user?.photoURL ? <img src={user?.photoURL} alt="" className='w-12 rounded-3xl' /> :
+                                <AiOutlineUser></AiOutlineUser>}
                             <p className='mx-1 text-orange-200 font-semibold normal-case '>{user?.displayName ? <p>{user.displayName.toUpperCase()}</p> : <p>{user.email.substring(0, user.email.lastIndexOf("@")).toUpperCase()}</p>}</p>
 
 
