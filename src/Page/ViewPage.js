@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { FaStar } from 'react-icons/fa';
@@ -10,6 +10,13 @@ const ViewPage = () => {
     const details = useLoaderData();
     const { user } = useContext(AuthContext);
     console.log(details);
+    const [reviews, setReviews] = useState([])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/review/${details._id}`)
+            .then(res => res.json())
+            .then(data => setReviews(data))
+    }, [details._id])
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -38,7 +45,13 @@ const ViewPage = () => {
             body: JSON.stringify(reviews)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    alert('thanks for reviews our service')
+                    form.reset();
+                }
+            })
 
     }
 
@@ -68,7 +81,7 @@ const ViewPage = () => {
                 <div className='w-1/2  gap-3 mt-5'>
                     <form onSubmit={handleSubmit}>
                         <input type="text" name='name' placeholder="Name" className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
-                        <input type="text" name='email' defaultValue={user.email} readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
+                        <input type="text" name='email' defaultValue={user?.email} readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
                         <input type="text" name='serviceName' defaultValue={details.name}
                             readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
                         <textarea name='message' className="textarea textarea-secondary w-full max-w-md mb-2 h-56" placeholder="Text Here Your Message About Our Service"></textarea><br />
@@ -80,7 +93,8 @@ const ViewPage = () => {
                 </div>
             </div>
             <div>
-                <h1>Our Reviews</h1>
+                <h1>Our Reviews :{reviews.length}</h1>
+
             </div>
         </div>
     );
