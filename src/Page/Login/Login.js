@@ -7,7 +7,15 @@ import { AuthContext } from '../../Contexts/Context';
 
 const Login = () => {
 
-    const { SignIn } = useContext(AuthContext)
+    const { SignIn, googleSignIn } = useContext(AuthContext)
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.log(error))
+    }
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -53,7 +61,7 @@ const Login = () => {
                         <div className="icon-button">
 
 
-                            <button className='' ><span className='ms-2 flex flex-row justify-center align-middle gap-2' >
+                            <button className='' onClick={handleGoogle} ><span className='ms-2 flex flex-row justify-center align-middle gap-2' >
                                 <FaGoogle className='mt-1'></FaGoogle><p>Sign in with Google</p>
 
                             </span></button>

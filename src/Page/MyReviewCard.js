@@ -1,8 +1,9 @@
 import React from 'react';
 import { AiOutlineUser } from 'react-icons/ai'
 
-const MyReviewCard = ({ review }) => {
-    const { email, message, photo, name, serviceName } = review;
+const MyReviewCard = ({ review, handleDelete }) => {
+    const { _id, email, message, photo, name, serviceName } = review;
+
     return (
         <div className='border-4 rounded-lg p-4 mb-2'>
             <div className='flex flex-row justify-between mb-2'>
@@ -20,7 +21,7 @@ const MyReviewCard = ({ review }) => {
 
                 </span>
                 <span>
-                    <button className='px-5 btn btn-ghost'>X</button>
+                    <button className='px-5 btn btn-ghost' onClick={() => handleDelete(_id)}>X</button>
                     <button className='px-5 btn btn-ghost'>Update</button>
                 </span>
             </div>

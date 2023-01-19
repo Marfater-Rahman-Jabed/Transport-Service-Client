@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { FaStar } from 'react-icons/fa';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Contexts/Context';
 import ReviewPage from './ReviewPage';
 
@@ -57,6 +57,22 @@ const ViewPage = () => {
 
     }
 
+    const handleDelete = (_id) => {
+        console.log(_id)
+        fetch(`http://localhost:5000/review/${_id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    alert('delete data successfully');
+                    const remainnig = reviews.filter(revi => revi._id !== _id)
+                    // const newReview = [...reviews, remainnig];
+                    setReviews(remainnig)
+                }
+            })
+    }
     return (
         <div>
             <div className='flex flex-row  gap-5'>
@@ -81,16 +97,23 @@ const ViewPage = () => {
                     </div>
                 </div>
                 <div className='w-1/2  gap-3 mt-5'>
-                    <form onSubmit={handleSubmit}>
-                        <input type="text" name='name' placeholder="Name" className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
-                        <input type="text" name='email' defaultValue={user?.email} readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
-                        <input type="text" name='serviceName' defaultValue={details.name}
-                            readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
-                        <textarea name='message' className="textarea textarea-secondary w-full max-w-md mb-2 h-56" placeholder="Text Here Your Message About Our Service"></textarea><br />
-                        {/* <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full max-w-md mb-2" /> */}
-                        {/* <span className='text-center '><button className="btn btn-secondary px-36 mx-4">Reviewed</button></span> */}
-                        <button className='w-full max-w-md btn btn-secondary'><input type="submit" value="Reviewed" /></button>
-                    </form>
+
+                    {user?.email ?
+                        <form onSubmit={handleSubmit}>
+                            <input type="text" name='name' placeholder="Name" className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
+                            <input type="text" name='email' defaultValue={user?.email} readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
+                            <input type="text" name='serviceName' defaultValue={details.name}
+                                readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
+                            <textarea name='message' className="textarea textarea-secondary w-full max-w-md mb-2 h-56" placeholder="Text Here Your Message About Our Service"></textarea><br />
+                            {/* <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full max-w-md mb-2" /> */}
+                            {/* <span className='text-center '><button className="btn btn-secondary px-36 mx-4">Reviewed</button></span> */}
+                            <button className='w-full max-w-md btn btn-secondary'><input type="submit" value="Reviewed" /></button>
+                        </form> :
+                        <div>
+                            <p className='text-center py-12 text-3xl font-semibold shadow-xl'>Please Login first to  gives review. <br /> <Link to='/login'><u>Login</u></Link></p>
+
+                        </div>
+                    }
 
                 </div>
             </div>
@@ -105,6 +128,7 @@ const ViewPage = () => {
 
                                     key={review._id}
                                     review={review}
+                                    handleDelete={handleDelete}
 
                                 ></ReviewPage>)
 
