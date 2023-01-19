@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Contexts/Context';
 import { AiOutlineUser } from 'react-icons/ai'
 import ReviewPage from './ReviewPage';
+import MyReviewCard from './MyReviewCard';
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
@@ -14,14 +15,13 @@ const MyReviews = () => {
     }, [user?.email])
     return (
         <div>
-            <p>You reviewed in our {reviews.length} service</p>
+            <p className='text-center py-12 text-3xl font-semibold shadow-xl text-fuchsia-600'>You reviewed in our {reviews.length} service</p>
             <div>
                 {
-                    reviews.map(review => <ReviewPage
-
+                    reviews.map(review => <MyReviewCard
                         key={review._id}
                         review={review}
-                    ></ReviewPage>)
+                    ></MyReviewCard>)
                 }
             </div>
         </div>

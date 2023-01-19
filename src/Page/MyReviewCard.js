@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineUser } from 'react-icons/ai'
 
-const ReviewPage = ({ review }) => {
+const MyReviewCard = ({ review }) => {
     const { email, message, photo, name, serviceName } = review;
     return (
         <div className='border-4 rounded-lg p-4 mb-2'>
@@ -12,14 +12,17 @@ const ReviewPage = ({ review }) => {
                         :
                         <AiOutlineUser></AiOutlineUser>}
                     <span>
-                        <p>Name:{name}</p>
-                        <p className=''>Email : {email}</p>
 
+                        <p className=''>Email : {email}</p>
+                        <p>Service Name:{serviceName}</p>
 
                     </span>
 
                 </span>
-                <p>Service Name:{serviceName}</p>
+                <span>
+                    <button className='px-5 btn btn-ghost'>X</button>
+                    <button className='px-5 btn btn-ghost'>Update</button>
+                </span>
             </div>
             <div>
                 <p>{message}</p>
@@ -29,4 +32,4 @@ const ReviewPage = ({ review }) => {
     );
 };
 
-export default ReviewPage;
+export default MyReviewCard;

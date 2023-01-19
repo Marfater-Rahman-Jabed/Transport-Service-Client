@@ -89,7 +89,7 @@ const ViewPage = () => {
                         <textarea name='message' className="textarea textarea-secondary w-full max-w-md mb-2 h-56" placeholder="Text Here Your Message About Our Service"></textarea><br />
                         {/* <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full max-w-md mb-2" /> */}
                         {/* <span className='text-center '><button className="btn btn-secondary px-36 mx-4">Reviewed</button></span> */}
-                        <button className='w-full'><input type="submit" value="Reviewed" className='btn btn-secondary ' /></button>
+                        <button className='w-full max-w-md btn btn-secondary'><input type="submit" value="Reviewed" /></button>
                     </form>
 
                 </div>
