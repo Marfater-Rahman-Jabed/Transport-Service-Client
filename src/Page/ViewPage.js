@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { FaStar } from 'react-icons/fa';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Contexts/Context';
 import ReviewPage from './ReviewPage';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 const ViewPage = () => {
 
     const details = useLoaderData();
+    const location = useLocation();
     const { user } = useContext(AuthContext);
     console.log(details);
     const [reviews, setReviews] = useState([])
@@ -23,16 +25,14 @@ const ViewPage = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
-        const email = form.email.value;
-        const serviceName = form.serviceName.value;
         const message = form.message.value;
 
-        console.log(name, email, serviceName, message)
+        console.log(name, message)
 
         const reviews = {
             serviceId: details._id,
-            serviceName,
-            email,
+            serviceName: details.name,
+            email: user?.email,
             name,
             message,
             photo: user.photoURL
@@ -98,19 +98,20 @@ const ViewPage = () => {
                 </div>
                 <div className='w-1/2  gap-3 mt-5'>
 
+
                     {user?.email ?
                         <form onSubmit={handleSubmit}>
-                            <input type="text" name='name' placeholder="Name" className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
-                            <input type="text" name='email' defaultValue={user?.email} readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
-                            <input type="text" name='serviceName' defaultValue={details.name}
-                                readOnly className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
+                            <p className='text-center py-5 text-2xl font-semibold text-orange-600 '>Put Your  Review Here</p>
+                            <input type="text" name='name' placeholder="Enter Your Name" className="input input-bordered input-secondary w-full max-w-md mb-2" /><br />
                             <textarea name='message' className="textarea textarea-secondary w-full max-w-md mb-2 h-56" placeholder="Text Here Your Message About Our Service"></textarea><br />
                             {/* <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full max-w-md mb-2" /> */}
                             {/* <span className='text-center '><button className="btn btn-secondary px-36 mx-4">Reviewed</button></span> */}
                             <button className='w-full max-w-md btn btn-secondary'><input type="submit" value="Reviewed" /></button>
                         </form> :
                         <div>
-                            <p className='text-center py-12 text-3xl font-semibold shadow-xl'>Please Login first to  gives review. <br /> <Link to='/login'><u>Login</u></Link></p>
+                            <p className='text-center py-12 text-3xl font-semibold shadow-xl'>Please Login first to  gives review. <br /> <Link to="/login" state={{ from: location }} replace>
+                                <u>Login</u></Link></p>
+
 
                         </div>
                     }

@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import '../Login/Login.css';
 import { FaGoogle } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Context';
 
 const Register = () => {
-    const { CreateUser, googleSignIn, UpdateUser } = useContext(AuthContext)
+    const { CreateUser, googleSignIn, UpdateUser } = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -22,6 +23,7 @@ const Register = () => {
                 alert('successfully register');
                 handleProfile(name, photo);
                 form.reset();
+                navigate('/login')
                 console.log(user);
             })
             .catch(error => {

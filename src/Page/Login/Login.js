@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
 import '../Login/Login.css';
 import { FaGoogle } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Context';
 
 
 const Login = () => {
 
-    const { SignIn, googleSignIn } = useContext(AuthContext)
+    const { SignIn, googleSignIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const handleGoogle = () => {
         googleSignIn()
             .then(result => {
@@ -28,6 +32,7 @@ const Login = () => {
                 const user = result.user;
                 alert('successfully loog in');
                 form.reset();
+                navigate(from, { replace: true });
                 console.log(user);
             })
             .catch(error => console.log(error))
