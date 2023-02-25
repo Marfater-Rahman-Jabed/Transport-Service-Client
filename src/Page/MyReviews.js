@@ -3,6 +3,7 @@ import { AuthContext } from '../Contexts/Context';
 import { AiOutlineUser } from 'react-icons/ai'
 import ReviewPage from './ReviewPage';
 import MyReviewCard from './MyReviewCard';
+import { toast } from 'react-hot-toast';
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const MyReviews = () => {
             .then(data => {
                 console.log(data)
                 if (data.deletedCount > 0) {
-                    alert('delete data successfully');
+                    toast.success('delete data successfully');
                     const remainnig = reviews.filter(revi => revi._id !== _id)
                     // const newReview = [...reviews, remainnig];
                     setReviews(remainnig)

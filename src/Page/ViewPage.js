@@ -6,6 +6,7 @@ import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Contexts/Context';
 import ReviewPage from './ReviewPage';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import { toast } from 'react-hot-toast';
 
 const ViewPage = () => {
 
@@ -50,8 +51,11 @@ const ViewPage = () => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged) {
-                    alert('thanks for reviews our service')
+                    toast.success('thanks for reviews our service')
                     form.reset();
+                    // const newArray = [...reviews, data.insertedId];
+
+                    // setReviews(newArray);
                 }
             })
 
@@ -66,7 +70,7 @@ const ViewPage = () => {
             .then(data => {
                 console.log(data)
                 if (data.deletedCount > 0) {
-                    alert('delete data successfully');
+                    toast.success('delete data successfully');
                     const remainnig = reviews.filter(revi => revi._id !== _id)
                     // const newReview = [...reviews, remainnig];
                     setReviews(remainnig)

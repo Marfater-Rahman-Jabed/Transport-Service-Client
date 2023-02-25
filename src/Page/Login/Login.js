@@ -3,6 +3,7 @@ import '../Login/Login.css';
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Context';
+import { toast } from 'react-hot-toast';
 
 
 const Login = () => {
@@ -30,7 +31,7 @@ const Login = () => {
         SignIn(email, password)
             .then(result => {
                 const user = result.user;
-                alert('successfully loog in');
+                toast.success('successfully loog in');
                 form.reset();
                 navigate(from, { replace: true });
                 console.log(user);
@@ -47,7 +48,7 @@ const Login = () => {
 
                 <div className="content ">
 
-                    <div>
+                    <div className='my-4'>
                         <div className="text text-center">Please LogIn !!! </div>
                         <form onSubmit={handleSubmit}>
 
@@ -66,8 +67,8 @@ const Login = () => {
                         <div className="icon-button">
 
 
-                            <button className='' onClick={handleGoogle} ><span className='ms-2 flex flex-row justify-center align-middle gap-2' >
-                                <FaGoogle className='mt-1'></FaGoogle><p>Sign in with Google</p>
+                            <button className='' onClick={handleGoogle} ><span className='ms-2 flex flex-row justify-center align-middle gap-2 rounded-2xl' >
+                                <FaGoogle className='mt-1 '></FaGoogle><p>Sign in with Google</p>
 
                             </span></button>
 

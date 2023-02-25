@@ -5,16 +5,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-
-
-/* body {
-    display: grid;
-    /* place-items: center; */
-/* text-align: center; */
-/* background: #dde1e7; */
-/* } */
-
-*/ .noDecoration {
+.noDecoration {
     text-decoration: none;
 }
 
@@ -37,7 +28,7 @@
 }
 
 .bgcolor {
-    background-color: blueviolet;
+    background-color: rgba(34, 176, 233, 0.795);
     height: 100vh;
 }
 
@@ -45,6 +36,7 @@
     display: flex;
     place-items: center;
     padding-top: 70px;
+    padding-bottom: 10px;
     justify-content: center;
     align-items: center;
 
@@ -53,18 +45,16 @@
 .loginImg {
     padding-left: 200px;
     margin-left: 200px;
-    /* border-radius: 50px; */
+
 }
 
 .content {
-    /* display: grid;
-    place-items: center; */
+
 
     width: 330px;
     background: #dde1e7;
     border-radius: 10px;
-    /* border-bottom-right-radius: 10px; */
-    padding: 40px 30px;
+    padding: 20px 20px;
     box-shadow: -3px -3px 7px #ffffff73,
         2px 2px 5px rgba(94, 104, 121, 0.288);
 }

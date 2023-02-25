@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai'
+import UpdateModal from './UpdateModal/UpdateModal';
 
 const MyReviewCard = ({ review, handleDelete }) => {
     const { _id, email, message, photo, name, serviceName } = review;
+    const [modalItem, setModalItem] = useState(null);
 
     return (
         <div className='border-4 rounded-lg p-4 mb-2'>
@@ -21,15 +23,23 @@ const MyReviewCard = ({ review, handleDelete }) => {
 
                 </span>
                 <span>
-                    <button className='px-5 btn btn-ghost' onClick={() => handleDelete(_id)}>X</button>
-                    <button className='px-5 btn btn-ghost'>Update</button>
+                    <button className='px-5 btn btn-outline btn-sm' onClick={() => handleDelete(_id)}>Delete</button>
+                    <label htmlFor="UpdateModal" className="btn btn-outline btn-sm mx-1" onClick={() => setModalItem('x')} >Update</label>
                 </span>
             </div>
             <div>
                 <p>{message}</p>
             </div>
 
-        </div>
+            {
+                modalItem && <UpdateModal
+                    review={review}
+
+                    setModalItem={setModalItem}
+                ></UpdateModal>
+            }
+
+        </div >
     );
 };
 

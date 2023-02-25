@@ -3,6 +3,7 @@ import '../Login/Login.css';
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Context';
+import { toast } from 'react-hot-toast';
 
 const Register = () => {
     const { CreateUser, googleSignIn, UpdateUser } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const Register = () => {
         CreateUser(email, password)
             .then(result => {
                 const user = result.user;
-                alert('successfully register');
+                toast.success('successfully register');
                 handleProfile(name, photo);
                 form.reset();
                 navigate('/login')
